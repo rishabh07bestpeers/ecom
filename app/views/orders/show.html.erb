@@ -1,0 +1,38 @@
+<%if cannot? :manage, OrderDetail%>
+ <br>
+ <h2>Unauthorise access</h2>
+
+<%else%>
+
+   <br>
+
+
+   <%=link_to 'Go to dashboard', root_path%>
+   <br><br>
+
+   <h2>Orders details</h2>
+
+
+   <br><br>
+   <table>
+   <thead><th>name</th><th>price</th><th>stock</th><th>quantity</th><th>sub total</th></thead>
+   <tbody>
+      <%@total = 0%>
+      <%@order_details.each do |order_detail|%>
+         <%@product = Product.find(order_detail.product_id)%>
+         <tr>
+         
+               <td> <%=@product.name%></td>
+               <td> <%=@product.price%></td>
+               <td> <%=@product.stock%></td>
+               <td><%=order_detail.quantity%></td>
+               <td> <%=@product.price * order_detail.quantity%></td>
+               <%@total = @total  + (@product.price * order_detail.quantity)%>
+            
+         </tr>
+      <%end%>
+   </tbody>
+   </table>
+
+   <h2>Total : <%=@total%></h2>
+<%end%>

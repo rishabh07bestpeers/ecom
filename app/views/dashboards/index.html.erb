@@ -1,8 +1,31 @@
 <br>
 
-<%if current_user.seller = true%>
+<% if user_signed_in? %>
+    <%if current_user.seller == true%>
+        <br>
+        <%= link_to '1. Show my products', sellers_path%>
+        <br>
+        <%=link_to '2. Add new products', new_seller_path%>
+        <br>
+       
+      
+    <%else%>
+         <br>
+        <%=link_to '1. Show all products', buyers_path, data: { turbolinks: false }%>
+       <br>
+        <%=link_to '2. View Cart', carts_path%>
+        <br>
 
+        <br>
+        <%=link_to '2. show my orders', orders_path%>
+        <br>
+
+
+    <%end%>
+    <%=link_to 'logout', destroy_user_session_path, method: :delete%>
+<%else%>
+    <%=link_to 'login', new_user_session_path%>
 <%end%>
 
 
-<%=link_to 'logout', destroy_user_session_path, method: :delete%>
+

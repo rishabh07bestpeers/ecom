@@ -5,6 +5,18 @@ class Ability
 
   def initialize(user)
     # Define abilities for the user here. For example:
+    if user.seller?
+      cannot :manage, Cart
+      cannot :manage, Order
+      cannot :manage, OrderDetail
+      can :manage, Product
+      
+    else
+      can :manage, Cart
+      can :manage, Order
+      can :manage, OrderDetail
+      cannot :manage, Product
+    end
     #
     #   return unless user.present?
     #   can :read, :all

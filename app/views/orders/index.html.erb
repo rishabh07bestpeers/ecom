@@ -1,0 +1,18 @@
+<%if cannot? :manage, Order%>
+ <br>
+ <h2>Unauthorise access</h2>
+
+<%else%>
+    <br>
+
+    <%=link_to 'Go to dashboard', root_path%>
+    <br><br>
+
+    <h2>My orders</h2>
+
+    <%@orders.each do |order|%>
+        <%=link_to "Order with order id #{order.id}", order_path(order)%><br>
+    
+    <%end%>
+
+<%end%>

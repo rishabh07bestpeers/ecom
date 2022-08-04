@@ -1,0 +1,27 @@
+<%if cannot? :manage, Product%>
+ <br>
+ <h2>Unauthorise access</h2>
+<%else%>
+
+
+    <br>
+
+    <%=link_to 'Go to dashboard', root_path%>
+    <br><br>
+
+    <h2>Products customers:</h2>
+
+    <%@orders.each do |order|%>
+        <%order.order_details.where(product_id: @product.id).each do |order_detail|%>
+            <%@customer = order_detail.order.user_id%>
+            Order ID: <%=order_detail.order.id%><br>
+            Product ID: <%=order_detail.product_id%><br>
+            Quantity: <%=order_detail.quantity%><br>
+            Subtotal: <%=order_detail.subtotal%><br>
+            Customer name: <%=User.find(@customer).name%><br><br>
+            
+            
+        <%end%>
+    <%end%>
+
+<%end%>

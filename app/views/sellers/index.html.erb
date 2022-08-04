@@ -1,0 +1,27 @@
+<%if cannot? :manage, Product%>
+ <br>
+ <h2>Unauthorise access</h2>
+
+<%else%>
+    <br><br>
+
+    <%=link_to 'Go to dashboard', root_path%>
+    <br><br>
+    <table>
+    <thead><th>name</th><th>price</th><th>stock</th></thead>
+    <tbody>
+        <%@user.products.each do |product|%>
+            <tr>
+                <td> <%=product.name%></td>
+                <td> <%=product.price%></td>
+                <td> <%=product.stock%></td>
+                <td><%= link_to "Edit  ", edit_seller_path(product) %></td>
+                <td><%= link_to "show customers ", seller_path(product) %></td>
+                <td><%= link_to "Delete  ", seller_path(product), method: :delete,  data: { confirm: "Are you sure?" }%></td>
+            </tr>
+        <%end%>
+    </tbody>
+    </table>
+
+<%end%>
+
