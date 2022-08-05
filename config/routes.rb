@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root "dashboards#index"
   resources :sellers
   resources :buyers
+  get "/search", to: "buyers#search"
+
   resources :carts
   resources :orders
   resources :order_details

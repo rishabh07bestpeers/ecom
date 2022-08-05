@@ -1,17 +1,17 @@
 
 <div class="container">
     <br>
-    <h2 class="text-center">All Products</h2>
+    <h2 class="text-center">Showing results for "<%=params[:query]%>"</h2>
     <br>
     <div class="row">
         <div class="col-sm">
             <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
         </div>
-     
+    
          <div class="col-sm">
             <%= form_with url: "/search", method: :get do |form| %>
                 
-                <%= form.text_field :query, placeholder:'Search Product..' %>
+                <%= form.text_field :query, value: params[:query],placeholder:'Search Product..' %>
                 <%= form.submit "Search" %>
             <% end %>
         </div>

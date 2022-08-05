@@ -20,7 +20,7 @@
                 <td> RS <%=@product.price%></td>
                 <td> <%=@product.stock%></td>
                 
-                <td><%=form.number_field :quantity, value: cart.quantity, min: 1, max: (@product.stock +  cart.quantity)%></td>
+                <td><%=form.number_field :quantity, value: cart.quantity, min: 1, max: @product.stock%></td>
                 <td> Rs <%=@product.price * cart.quantity%></td>
                 <%@total = @total  + (@product.price * cart.quantity)%>
                 <td> <%= form.submit "Update cart" %></td>
