@@ -1,25 +1,25 @@
-<%if cannot? :manage, Product%>
- <br>
- <h2>Unauthorise access</h2>
-<%else%>
 
-  <h2>edit Product:</h2>
-  <%= form_with model: @product, url: seller_path, method: :PATCH do |form| %>
-    <p>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-    </p>
-    <p>
-      <%= form.label :price %><br>
-      <%= form.text_area :price %>
-    </p>
-      <p>
-      <%= form.label :stock %><br>
-      <%= form.text_area :stock %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-  <% end %>
+<div class="container">
+    <h2 class="text-center">Add Product</h2>
+    <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
+    <br>
 
-<%end%>
+    
+    <%= form_with model: @product, url: seller_path, method: :PATCH do |form| %>
+     <div class="form-group">
+        <%= form.label :name %><br>
+        <%= form.text_field :name %>
+      </div>
+      <div class="form-group">
+        <%= form.label :price %><br>
+        <%= form.text_area :price %>
+     </div>
+      <div class="form-group">
+        <%= form.label :stock %><br>
+        <%= form.text_area :stock %>
+      </div>
+     <div class="form-group">
+        <%= form.submit %>
+     </div>
+    <% end %>
+</div>

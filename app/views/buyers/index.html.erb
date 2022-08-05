@@ -1,37 +1,42 @@
 
-<%if cannot? :manage, Cart%>
- <br>
- <h2>Unauthorise access</h2>
-
-<%else%>
-
-
+<div class="container">
+    <h2 class="text-center">All Products</h2>
+ 
+    <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
+    
     <br><br>
-
-    <%=link_to 'Go to dashboard', root_path%>
-    <br><br>
-    <table>
-    <thead><th>name</th><th>price</th><th>stock</th><th>quantity</th></thead>
+    <table class="table">
+    <thead><th>Name</th><th>Price</th><th>Stock</th><th>Quantity</th></thead>
     <tbody>
         <%@products.each do |product|%>
-            <tr>
-            <%= form_with model: product, url: carts_path, method: :POST do |form| %>
-                <%=form.hidden_field  :id, name: 'product[product_id]'%>
-                <td> <%=product.name%></td>
-                <td> <%=product.price%></td>
-                <td> <%=product.stock%></td>
-                <%if @user.carts.where(product_id: product.id).empty? %>
-                    <td><%=form.number_field :quantity, value: 0, min: 1, max: product.stock%></td>
-                
-                    <td> <%= form.submit "Add to cart" %></td>
-                <%else%>
-                    <td> <%= link_to "Go to cart",  carts_path, data: { turbolinks: false }%></td>
+          <%if Hidelist.where(product_id: product.id).empty? %>
+                <tr>
+                <%= form_with model: product, url: carts_path, method: :POST do |form| %>
+                    <%=form.hidden_field  :id, name: 'product[product_id]'%>
+                    <td> <%=product.name%></td>
+                    <td> Rs <%=product.price%></td>
+                    <td> <%=product.stock%></td>
+                    <%if @user.carts.where(product_id: product.id).empty? %>
+                        <td><%=form.number_field :quantity, value: 0, min: 1, max: product.stock%></td>
+                    
+                        <td> <%= form.submit "Add to cart" %></td>
+                    <%else%>
+                    <td><%= @user.carts.where(product_id: product.id)[0].quantity%></td>
+                        <td> <%= link_to "Go to cart",  carts_path, data: { turbolinks: false }%></td>
 
+                    <%end%>
+
+                    <%if @user.wishlists.where(product_id: product.id).empty? %>
+                        <td> <%= link_to "Add to wishlist",  wishlists_path(product_id: product.id),  method: :post, data: { turbolinks: false }%></td>
+                    <%else%>
+                        <td> <%= link_to "Go to wishlist",  wishlists_path, data: { turbolinks: false }%></td>
+                    <%end%>
                 <%end%>
-                
+                </tr>
             <%end%>
-            </tr>
         <%end%>
     </tbody>
     </table>
-<%end%>
+
+</div>
+

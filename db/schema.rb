@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_02_105113) do
+ActiveRecord::Schema.define(version: 2022_08_04_064722) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "quantity"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2022_08_02_105113) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "featurelists", force: :cascade do |t|
+    t.string "type"
+    t.integer "product_id"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_featurelists_on_user_id"
   end
 
   create_table "order_details", force: :cascade do |t|
@@ -63,4 +72,5 @@ ActiveRecord::Schema.define(version: 2022_08_02_105113) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "featurelists", "users"
 end

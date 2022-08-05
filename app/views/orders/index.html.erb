@@ -1,18 +1,14 @@
-<%if cannot? :manage, Order%>
- <br>
- <h2>Unauthorise access</h2>
 
-<%else%>
-    <br>
+<div class="container">
+   <h2 class="text-center">Your Orders</h2>
+   <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
+   <br>
 
-    <%=link_to 'Go to dashboard', root_path%>
-    <br><br>
+   <ul class="list-group">
+      <%@orders.each do |order|%>
+         <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to "Order with order id #{order.id}", order_path(order)%></li>
+      
+      <%end%>
+   </ul>
 
-    <h2>My orders</h2>
-
-    <%@orders.each do |order|%>
-        <%=link_to "Order with order id #{order.id}", order_path(order)%><br>
-    
-    <%end%>
-
-<%end%>
+</div>

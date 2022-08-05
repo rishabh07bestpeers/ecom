@@ -1,0 +1,42 @@
+
+<div class="container">
+<h2 class="text-center">Your Wishlist</h2>
+<%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
+
+
+<br><br>
+<table class="table">
+<thead><th>Name</th><th>Price</th><th>Stock</th><th>Quantity</th></thead>
+<tbody>
+    <%@wishlists.each do |wishlist|%>
+        <%@product = Product.find(wishlist.product_id)%>
+            <%if Hidelist.where(product_id: @product.id).empty? %>
+            <tr>
+            
+                <%= form_with model: @product, url: carts_path, method: :POST do |form| %>
+                    <%=form.hidden_field  :id, name: 'product[product_id]'%>
+                    <td> <%=@product.name%></td>
+                    <td> Rs <%=@product.price%></td>
+                    <td> <%=@product.stock%></td>
+                    <%if @user.carts.where(product_id: @product.id).empty? %>
+                        <td><%=form.number_field :quantity, value: 0, min: 1, max: @product.stock%></td>
+                    
+                        <td> <%= form.submit "Add to cart" %></td>
+                    <%else%>
+                        <td><%= @user.carts.where(product_id: @product.id)[0].quantity%></td>
+                        <td> <%= link_to "Go to cart",  carts_path, data: { turbolinks: false }%></td>
+
+                    <%end%>
+
+                    <td> <%= link_to "Remove from wishlist",  wishlist_path(wishlist), method: :delete, data: { turbolinks: false,  confirm: "Are you sure?" }%></td>
+
+                <%end%>
+            
+                
+            </tr>
+        <%end%>
+    <%end%>
+</tbody>
+</table>
+</div>
+

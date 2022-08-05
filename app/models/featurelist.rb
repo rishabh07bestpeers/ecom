@@ -1,0 +1,3 @@
+class Featurelist < ApplicationRecord
+ 
+end

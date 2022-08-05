@@ -1,25 +1,25 @@
-<%if cannot? :manage, Product%>
- <br>
- <h2>Unauthorise access</h2>
 
-<%else%>
+<div class="container">
+  <h2 class="text-center">Add Product</h2>
+  <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
+  <br>
+  
 
-  <h2>New Product:</h2>
   <%= form_with model: @product, url: sellers_path, method: :POST do |form| %>
-    <p>
+    <div class="form-group">
       <%= form.label :name %><br>
       <%= form.text_field :name %>
-    </p>
-    <p>
+    </div>
+      <div class="form-group">
       <%= form.label :price %><br>
       <%= form.text_area :price %>
-    </p>
-      <p>
+    </div>
+    <div class="form-group">
       <%= form.label :stock %><br>
       <%= form.text_area :stock %>
-    </p>
-    <p>
+    </div>
+    <div class="form-group">
       <%= form.submit %>
-    </p>
+    </div>
   <% end %>
-<%end%>
+</div>

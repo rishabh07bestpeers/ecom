@@ -1,5 +1,5 @@
 class SellersController < ApplicationController
-    
+   load_and_authorize_resource :class => "Product"
     def index
         @user = current_user
 

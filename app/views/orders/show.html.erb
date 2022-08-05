@@ -1,21 +1,14 @@
-<%if cannot? :manage, OrderDetail%>
- <br>
- <h2>Unauthorise access</h2>
 
-<%else%>
-
+<div class="container">
+   <h2 class="text-center">Order Details</h2>
+   <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
    <br>
 
 
-   <%=link_to 'Go to dashboard', root_path%>
-   <br><br>
-
-   <h2>Orders details</h2>
-
 
    <br><br>
-   <table>
-   <thead><th>name</th><th>price</th><th>stock</th><th>quantity</th><th>sub total</th></thead>
+   <table class="table">
+   <thead><th>Name</th><th>Price</th><th>Stock</th><th>Quantity</th><th>Sub Total</th></thead>
    <tbody>
       <%@total = 0%>
       <%@order_details.each do |order_detail|%>
@@ -23,10 +16,10 @@
          <tr>
          
                <td> <%=@product.name%></td>
-               <td> <%=@product.price%></td>
+               <td> Rs <%=@product.price%></td>
                <td> <%=@product.stock%></td>
                <td><%=order_detail.quantity%></td>
-               <td> <%=@product.price * order_detail.quantity%></td>
+               <td> Rs <%=@product.price * order_detail.quantity%></td>
                <%@total = @total  + (@product.price * order_detail.quantity)%>
             
          </tr>
@@ -34,5 +27,5 @@
    </tbody>
    </table>
 
-   <h2>Total : <%=@total%></h2>
-<%end%>
+   <h2>Total : Rs <%=@total%></h2>
+</div>

@@ -1,30 +1,40 @@
 <br>
 
 <% if user_signed_in? %>
-    <%if current_user.seller == true%>
-        <br>
-        <%= link_to '1. Show my products', sellers_path%>
-        <br>
-        <%=link_to '2. Add new products', new_seller_path%>
-        <br>
-       
-      
-    <%else%>
-         <br>
-        <%=link_to '1. Show all products', buyers_path, data: { turbolinks: false }%>
-       <br>
-        <%=link_to '2. View Cart', carts_path%>
-        <br>
+ <div class="container">
+ <h2 class="text-center">Dashboard</h2>
+    <ul class="list-group">
+            <%if current_user.seller == true%>
+            
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); " ><%= link_to '1. Show My Products', sellers_path%></li>
+                
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to '2. Add New Products', new_seller_path%></li>
+                
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to '3. Go To Hidelist', hidelists_path%></li>
+            
 
-        <br>
-        <%=link_to '2. show my orders', orders_path%>
-        <br>
-
-
-    <%end%>
-    <%=link_to 'logout', destroy_user_session_path, method: :delete%>
+            
+            <%else%>
+            
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to '1. Show All Products', buyers_path, data: { turbolinks: false }%></li>
+        
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to '2. View Cart', carts_path%></li>
+            
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to '3. Go To Wishlist', wishlists_path%></li>
+            
+                <li class="list-group-item" style=" background-color: rgba(255,255,255,0.5); "><%=link_to '4. show My Orders', orders_path%></li>
+            
+            <%end%>
+            <li class="list-group-item"><%=link_to 'Logout', destroy_user_session_path, method: :delete%></li>
+        </ul> 
+ </div>
 <%else%>
-    <%=link_to 'login', new_user_session_path%>
+<div class="container">
+ <h2 class="text-center">Please login to continue</h2>
+ <ul class="list-group">
+     <li class="list-group-item"><%=link_to 'Login', new_user_session_path%></li>
+</ul>
+</div>
 <%end%>
 
 

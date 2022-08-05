@@ -1,27 +1,28 @@
-<%if cannot? :manage, Product%>
- <br>
- <h2>Unauthorise access</h2>
-<%else%>
 
-
+ <div class="container">
+    <h2 class="text-center">Products customers</h2>
+    <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
     <br>
 
-    <%=link_to 'Go to dashboard', root_path%>
-    <br><br>
+    <table class="table">
+        <thead><th>Customer name</th><th>Order ID</th><th>Quantity</th><th>Subtotal</th></thead>
+        <tbody>
 
-    <h2>Products customers:</h2>
-
-    <%@orders.each do |order|%>
-        <%order.order_details.where(product_id: @product.id).each do |order_detail|%>
-            <%@customer = order_detail.order.user_id%>
-            Order ID: <%=order_detail.order.id%><br>
-            Product ID: <%=order_detail.product_id%><br>
-            Quantity: <%=order_detail.quantity%><br>
-            Subtotal: <%=order_detail.subtotal%><br>
-            Customer name: <%=User.find(@customer).name%><br><br>
-            
-            
+        <%@orders.each do |order|%>
+            <%order.order_details.where(product_id: @product.id).each do |order_detail|%>
+                <%@customer = order_detail.order.user_id%>
+                <tr>
+                 <td><%=User.find(@customer).name%></td>
+                <td><%=order_detail.order.id%></td>
+                
+                <td><%=order_detail.quantity%></td>
+                <td>Rs <%=order_detail.subtotal%></td>
+               
+                </tr>
+             <%end%>
         <%end%>
-    <%end%>
+        </tbody>
+    </table>
 
-<%end%>
+
+</div>

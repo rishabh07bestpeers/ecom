@@ -8,14 +8,17 @@ class Ability
     if user.seller?
       cannot :manage, Cart
       cannot :manage, Order
-      cannot :manage, OrderDetail
+      # cannot :manage, OrderDetail
       can :manage, Product
-      
+      cannot :manage, Wishlist
+      can :manage, Hidelist
     else
       can :manage, Cart
       can :manage, Order
-      can :manage, OrderDetail
+      # can :manage, OrderDetail
       cannot :manage, Product
+      can :manage, Wishlist
+      cannot :manage, Hidelist
     end
     #
     #   return unless user.present?

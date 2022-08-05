@@ -1,27 +1,29 @@
-<%if cannot? :manage, Product%>
- <br>
- <h2>Unauthorise access</h2>
 
-<%else%>
-    <br><br>
+<div class="container">
+    <h2 class="text-center">My Products</h2>
+    <%= button_to 'Go to dashboard', root_path, method: :get, type: "button", class: "btn btn-primary", style: "font-size:15px;"%>
+    <br>
 
-    <%=link_to 'Go to dashboard', root_path%>
-    <br><br>
-    <table>
-    <thead><th>name</th><th>price</th><th>stock</th></thead>
+    
+    <table class="table">
+    <thead><th>Name</th><th>Price</th><th>Stock</th></thead>
     <tbody>
         <%@user.products.each do |product|%>
             <tr>
                 <td> <%=product.name%></td>
-                <td> <%=product.price%></td>
+                <td> Rs  <%=product.price%></td>
                 <td> <%=product.stock%></td>
-                <td><%= link_to "Edit  ", edit_seller_path(product) %></td>
-                <td><%= link_to "show customers ", seller_path(product) %></td>
+                <td><%= link_to "Edit  ", edit_seller_path(product) %>&nbsp;&nbsp;&nbsp;</td>
+                <td><%= link_to "show customers ", seller_path(product) %>&nbsp;&nbsp;&nbsp;</td>
+                <%if @user.hidelists.where(product_id: product.id).empty? %>
+                    <td><%= link_to "Add to hidelist ", hidelists_path(product_id: product.id), method: :post %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <%else%>
+                    <td><%= link_to "Go to hidelist ", hidelists_path %>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <%end%>
                 <td><%= link_to "Delete  ", seller_path(product), method: :delete,  data: { confirm: "Are you sure?" }%></td>
             </tr>
         <%end%>
     </tbody>
     </table>
-
-<%end%>
+</div>
 
